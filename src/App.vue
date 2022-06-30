@@ -1,14 +1,33 @@
 <template>
   <div id="app">
     <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link class="px-3" to="/">Inicio</router-link>
+      |
+      <router-link class="px-3" to="/nosotros">Nosotros</router-link>
     </nav>
-    <router-view/>
+
+    <TituloVue/>
+
+    <div class="card col-11 col-md-8 mx-auto mt-3">
+      <router-view/>
+    </div>
   </div>
 </template>
 
+<script>
+  import TituloVue from "@/components/TituloVue";
+
+  export default {
+    components: {
+      TituloVue
+    }
+  }
+</script>
+
 <style lang="scss">
+.card {
+  height: 70vh;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -18,7 +37,7 @@
 }
 
 nav {
-  padding: 30px;
+  padding: 3px;
 
   a {
     font-weight: bold;

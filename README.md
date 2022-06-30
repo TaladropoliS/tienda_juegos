@@ -1,4 +1,4 @@
-# vuex1
+# tienda_juegos
 
 ## Project setup
 ```
