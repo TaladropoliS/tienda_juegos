@@ -8,15 +8,24 @@ export default new Vuex.Store({
         titulo: '32 bits',
         juegos: [],
         totalStock: 0,
+        valorInventario: 0,
     },
     getters: {
         totalStock(state) {
             state.totalStock = 0
             for (let i of state.juegos) {
-                let pre = parseInt(i.stock)
-                state.totalStock += pre
+                let stock = parseInt(i.stock)
+                state.totalStock += stock
             }
             return state.totalStock
+        },
+        valorInventario(state) {
+            state.valorInventario = 0
+            for (let i of state.juegos) {
+                let valInv = i.stock * i.precio
+                state.valorInventario += valInv
+            }
+            return state.valorInventario
         }
     },
     mutations: {

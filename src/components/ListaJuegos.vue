@@ -16,8 +16,8 @@
       <tr v-for="(item, index) in juegos" :key="index">
         <td :style="`color: ${item.color}`">{{ item.codigo }}</td>
         <td :style="`color: ${item.color}`">{{ item.nombre }}</td>
-        <td :style="`color: ${item.color}`">{{ item.stock }}</td>
-        <td :style="`color: ${item.color}`">{{ item.precio }}</td>
+        <td :style="`color: ${item.color}`">{{ parseInt(item.stock).toLocaleString() }}</td>
+        <td :style="`color: ${item.color}`">{{ parseInt(item.precio).toLocaleString() }}</td>
         <td :style="`color: ${item.color}`">
           <button v-if="item.stock>=1" @click="menos(item.codigo)" class="btn btn-sm btn-outline-danger me-1"><i
               class="fas fa-minus"></i></button>
@@ -31,7 +31,7 @@
         <th>{{ juegos.length }}</th>
         <th></th>
         <th>{{ totalStock }}</th>
-        <th></th>
+        <th>{{valorInventario.toLocaleString()}}</th>
         <th></th>
       </tr>
       </tfoot>
@@ -44,7 +44,8 @@
     name: "ListaJuegos",
     props: {
       juegos: Array,
-      totalStock: Number
+      totalStock: Number,
+      valorInventario:Number,
     },
     methods: {
       mas(id) {
