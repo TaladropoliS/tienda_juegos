@@ -7,15 +7,27 @@ export default new Vuex.Store({
     state: {
         titulo: '32 bits',
         juegos: [],
+        // totalArticulos: 0,
+        totalStock: '',
     },
-    getters: {},
+    getters: {
+        totalStock(state) {
+            for (let i of state.juegos) {
+                console.log(i)
+                let pre = parseInt(i.stock)
+                console.log(pre)
+                state.totalStock += pre
+            }
+            return state.totalStock = 100
+        }
+    },
     mutations: {
-        setJuegos(state, payload) {
-            state.juegos = payload
+        setJuegos(state, data) {
+            state.juegos = data
         }
     },
     actions: {
-        fetchData: async function ({commit}) {
+        async fetchData({commit}) {
             try {
                 const res = await fetch('juegos.json')
                 const data = await res.json()
@@ -23,7 +35,7 @@ export default new Vuex.Store({
             } catch (error) {
                 console.log(error)
             }
-        }
+        },
     },
     modules: {},
 })

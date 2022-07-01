@@ -6,7 +6,7 @@
       <router-link class="px-3" to="/nosotros">Nosotros</router-link>
     </nav>
 
-    <TituloVue/>
+    <Titulo/>
 
     <div class="card col-11 col-md-8 mx-auto mt-3">
       <router-view/>
@@ -15,11 +15,11 @@
 </template>
 
 <script>
-  import TituloVue from "@/components/TituloVue";
+  import Titulo from "@/components/Titulo";
 
   export default {
     components: {
-      TituloVue
+      Titulo
     }
   }
 </script>
