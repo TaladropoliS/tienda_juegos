@@ -9,6 +9,7 @@ export default new Vuex.Store({
         juegos: [],
         totalStock: 0,
         valorInventario: 0,
+        listaColores: [],
     },
     getters: {
         totalStock(state) {
@@ -26,18 +27,27 @@ export default new Vuex.Store({
                 state.valorInventario += valInv
             }
             return state.valorInventario
-        }
+        },
     },
     mutations: {
         setJuegos(state, data) {
+            // recibe la lista de juegos desde el actions: y crea la lista de colores que viene en la data.
+            for (let i of data) {
+                const color = this.state.listaColores.find(e => (e === i.color))
+                if (color === undefined) this.state.listaColores.push(i.color)
+            }
             state.juegos = data
+            // console.log(data)
+        },
+        updateColoresJuegos(state, payload) {
+            // console.log(payload[0])
+            // console.log(payload[1])
+            state.juegos[payload[0]]['color'] = payload[1]
         },
         mas(state, id) {
-            // console.log(state.juegos)
+            // console.log(id)
             let q_actual = parseInt(state.juegos.find(e => e.codigo === id).stock)
             let q_nueva = q_actual + 1
-            // console.log(q_actual)
-            // console.log(q_nueva)
             for (let i = 0; i < state.juegos.length; i++) {
                 if (state.juegos[i].codigo === id) {
                     state.juegos[i].stock = q_nueva
@@ -45,11 +55,8 @@ export default new Vuex.Store({
             }
         },
         menos(state, id) {
-            // console.log(this.state.juegos)
             let q_actual = parseInt(this.state.juegos.find(e => e.codigo === id).stock)
             let q_nueva = q_actual - 1
-            // console.log(q_actual)
-            // console.log(q_nueva)
             for (let i = 0; i < this.state.juegos.length; i++) {
                 if (this.state.juegos[i].codigo === id) {
                     this.state.juegos[i].stock = q_nueva
